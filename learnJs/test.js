@@ -185,7 +185,7 @@ console.log("B:"+typeof(object));
 var obj = {
     name:'asd'
 }
-obj.name = 'bbbb'
+obj.name = 'bbbb';
 
 
 
