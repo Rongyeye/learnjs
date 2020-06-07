@@ -1,0 +1,22 @@
+{
+  "name": "learnjs",
+  "version": "1.0.0",
+  "description": "learnJs by javascript权威指南",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rongyeye/testProject.git"
+  },
+  "keywords": [
+    "js"
+  ],
+  "author": "rong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rongyeye/testProject/issues"
+  },
+  "homepage": "https://github.com/Rongyeye/testProject#readme"
+}
