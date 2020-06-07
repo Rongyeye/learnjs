@@ -181,6 +181,11 @@ console.log("N:"+typeof(n));
 console.log("B:"+typeof(b));
 console.log("B:"+typeof(object));
 
+// 对象
+var obj = {
+    name:'asd'
+}
+
 
 
 
