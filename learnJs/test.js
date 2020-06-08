@@ -188,6 +188,78 @@ var obj = {
 obj.name = 'bbbb';
 
 
+// 类型转换
+String(124);
+Boolean([]);
+Number('3');
+
+
+// 隐式转换
+changex = 1;
+resx = changex+'f'
+console.log(typeof(changex))//Number
+console.log(typeof(resx))//String
+// + Numberx  === toString()或者String(Numberx)
+
+// Boolean(x) === !!x
+
+// toString
+
+var changen = 32;
+console.log("10:"+changen.toString())
+console.log("2:"+changen.toString(2))
+console.log("8:"+changen.toString(8))
+console.log("16:"+changen.toString(16))
+
+// 保留小数点后面的位数
+// toFixed()
+var saven = 12345678.2343;
+var savedn = saven.toFixed(0);
+console.log(savedn)//12345678
+
+// 指数输出
+// var precisionN = saven.toPrecision(1)
+// var precisionN2 = saven.toExponential(1)
+var precisionN = saven.toPrecision(2)
+var precisionN2 = saven.toExponential(2)
+console.log(typeof(precisionN))//string
+console.log(precisionN)//1e+7
+
+console.log(typeof(precisionN2))//steing
+console.log(precisionN2)//1.2e+7
+
+// saven.toExponential 和 saven.toPrecision的区别
+
+// 全局函数：parseInt("需要转换的字符串"，转换的目标进制数) 
+var changey = '123  dfoahjl 34'
+var changey2 = '123.45';//123  .的阻挡，略过了45
+var changey3 = '.123  dfoahjl 34';
+var changey = '    123dfoahjl 34'//可以跳过空格
+// console.log(changey.ParseInt(changey))
+// 此写法错误
+// 说明parseInt 不是方法。。。。。。是全局函数
+
+console.log(parseInt(changey))//123，，，忽略了后面的内容
+
+// 变量
+var valueI = 123;
+valueI = 'value'
+console.log(valueI)//value
+// js未声明变量类型
+
+// 局部变量优先级高于全局变量
+// 全局变量会被局部变量覆盖
+// 只有在函数才有作用域
+
+
+//在声明局部变量的时候，一定要用var,否则就是在修改全局变量
+var scope = 'groble';
+function scopearea(){
+    scope = 'scope'
+}
+
+
+
 
 
 
