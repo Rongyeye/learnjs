@@ -261,8 +261,262 @@ function scopearea(){
 
 
 
+var globalvalue = 'adfdsf';
+delete globalvalue;
+console.log(globalvalue)//adfdsf can not delete
 
 
+// 作用域链
+// 第六章
 
 
+// 直接量
+1.23;
+'direct';
+/^a\d+/
 
+
+// 数组
+
+// 函数
+
+// ~按位取反
+var yy = 1;
+
+console.log(~yy);//-2
+
+// 三元运算符
+// a?b:(c?d:(e?f:g));
+
+var obj2 = {
+    name:'aaa',
+    age:18,
+    grade:'three'
+}
+console.log(1+obj2)//1[object Object]
+console.log(true+true)//2  true 转换为1；
+
+// delete
+delete obj2.name ;
+console.log("name" in obj2)//false
+console.log(obj2.name)//undefined
+// delete return boolean :delete success return true;fail delete return false
+
+// 自增
+var i = 1;j = i++;
+console.log('i:'+i+","+'j:'+j)//i = 2;j = 1;
+
+// in
+console.log('name' in obj2)//true
+
+// 构造对象
+var d = new Date();
+console.log(d instanceof Date)
+
+// eval()
+// eval() 是全局对象的一个函数属性。
+console.log(eval('2+1'))//3
+
+
+// alert
+// alert('hello')
+// window.alert('hello')
+
+// throw
+// 异常处理
+
+// function err(judge){
+//     if(judge<0) throw new Error("x不能是负数");
+//     console.log(judge)
+//     }
+// err(1)//1
+// err(-1)//Error: x不能是负数
+// 异常后下面的代码都不会执行了！！！！！！！！！！！
+// 解决：不要用throw new Error()
+// 用try/catch/finally异常处理机制
+// 输入控制
+function myfunction(){
+    var inputmessage = 'a';
+    try{
+        // if (inputmessage == null) throw new Error("不能为空");
+        if (inputmessage == null) throw"不能为空";
+        if(inputmessage.length<6) throw"不能低于6个字母";
+        // if(inputmessage.length<6) throw new Error("不能低于6个字母");
+    }catch(err){
+        console.log(err)
+    }
+}
+myfunction()
+// 没有显示？？？？？？？？？？
+// 因为上面执行了以下代码
+/*
+// function err(judge){
+//     if(judge<0) throw new Error("x不能是负数");
+//     console.log(judge)
+//     }
+*/
+
+function newFunction(value) {
+    try {
+        if (value == 0) throw '不能为0';
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+newFunction(0);//不能为0
+
+
+// with临时扩展作用域链
+// 严格模式禁用with
+function newfunction2(){
+    // "use strict"
+    with(object) console.log('with 临时扩展')
+}
+newfunction2()//SyntaxError: Strict mode code may not include a with statement
+
+
+// 创建对象
+// 1、new
+var obj1 = new Object()
+
+// 2、object.create()
+// 继承原型对象，属性x和y
+var obj3 = Object.create({x:1,y:2})
+// 不检继承任何原型
+var obj4 = Object.create(null)
+// 创建一个普通的对象
+var obj5 = Object.create(Object.prototype)
+// 可以通过任意原型创建新对象
+
+
+// 3、通过原型继承创建新对象ingerit()
+console.log(Object.prototype == Object["prototype"])//true
+
+
+// 属性的查询和设置机制
+var book = {
+    author:'fred',
+    title:'aaaa'
+}
+// 拿到属性值
+console.log( book.author)
+book.tag = 'novel'
+console.log(book)
+/*
+{ author: 'fred', title: 'aaaa', tag: 'novel' }
+*/
+// 修改属性值
+book.author = 'jog'
+console.log(book.author)
+
+
+// 继承,属性覆盖问题
+var book2 = Object.create(book);
+console.log(book2.author)//jog
+console.log(book2)//{}  => 所以创建一个新对象，虽然继承了原型的属性，但是并不会显示出来
+book2.author = 'rong'
+delete book2.author;
+console.log('author' in book2)//true  ????为什么没删除
+// delete 只能删除自身属性！！！不能删除继承属性
+book2.date = '2020-2-3'
+console.log(book2.date)//2020-2-3
+delete book2.date
+console.log(book2.date='删除自身属性成功！')//undefined  
+
+// delete
+var deletex = 1
+delete deletex;
+console.log(deletex +'删除失败')//1  删除失败
+// 不能删除全局变量
+// 但是可以删除全局对象的声明的属性
+ this.deletey = 1;
+ delete this.deletey ;
+ console.log(this.deletey+' 删除成功')//undefined   删除成功
+
+// 检测属性 in
+console.log('date' in book2)//true
+
+// 枚举
+console.log(Object.keys (book2))//[ 'date' ]
+// 只是它返回对象的所有自有属性的名称
+
+// 常量和局部变量
+// let constx = 1, consty = 2;
+// // let is notdefined ????
+// let (constx = constx+1,consty = constx+2) {
+//     console.log(constx+consty);
+// };
+// console.log(constx+consty)
+
+// 解构赋值
+// let [x,y] = [1,2]
+// let [x,y] = [x+1,y+1]
+
+// 数组
+// 方法
+// forEach()
+var data = [1,2,3,4,5,6]
+var sum = 0;
+data.forEach(x => {
+    console.log(x)
+})
+/**
+1
+2
+3
+4
+5
+6
+ */
+// 数组元素求和
+var foreachsum = data.forEach ( x => {
+    sum += x;
+    // return sum;
+})
+console.log ( foreachsum )//undefined  forEach 不返回数组 和map的区别
+console.log ( sum ) //21
+// 数组元素加一
+var dataforeach = []
+data.forEach ( x => {
+    x += 1;
+    dataforeach.push(x)
+})
+console.log(dataforeach)
+console.log(dataforeach)//[ 2, 3, 4, 5, 6, 7 ]
+// forEach()没有break
+
+// map()
+// 略
+
+// filter()
+// filter()传参函数是逻辑判断函数
+// 返回true or false
+
+var small3 = data.filter(x => {
+    return x > 3;
+})
+console.log(small3)//[ 4, 5, 6 ]  
+// 原理产生一个数组的子集，
+// 该子集满足条件，
+// 返回的是true的元素才会加入新数组
+
+// reduce
+// 数组最大值
+// 把两个值化简为一个值，再返回该值
+var max = data.reduce((x,y) => {
+    return x > y ? x : y
+})
+console.log(max)//6
+// 数组连乘积
+var product = data.reduce((x,y) => {
+    return x*y
+})
+console.log( product )
+
+
+// 函数
+// 函数定义
+// 略
+
+// 类
