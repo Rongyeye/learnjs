@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+      <!--响应机制  -->
+    <div>
+      <!-- // 数据与app模板绑定了，响应式 -->
+      {{message}}
+      {{message+1111}}
+      {{message ? 'yes' : 'ok'}}
+      <!-- : v-bind  数据绑定 -->
+      <!-- <img :src="path"></img> -->
+      <!-- 动态绑定事件名 -->
+      <span v-on:[event]="dosomething"></span>
+      <!-- 绑定事件修饰符 -->
+    </div>
+    <!-- 条件渲染 -->
+    <div>
+      <!-- v-if 真正的条件渲染，只有条件为true时才会局部渲染dom，更改为false 后删除dom-->
+      <h2 v-if="isShow">aaaa</h2>
+      <!-- v-show 无论真假都渲染了dom，false只是隐藏了dom-->
+      <h2 v-show="isshow">bbb</h2>
+    </div>
+    <!-- 事件监听器 v-on-->
+    <div>
+      <p>{{message2}}</p>
+      <button v-on:click="reverseMessage">逆转消息</button>
+    </div>
+    <!-- 用户输入绑定数据 -->
+    <!-- v-model -->
+    <div>
+      <input type="text" v-model="message">
+    </div>
+
+
+    <!-- vue 修饰符 -->
+    <div>
+      <!-- .stop 阻止单击事件继续传播？？？？？-->
+      <a @click="doThis" href="https://www.baidu.com/">111</a>
+      <a @click.stop="doThis" href="https://www.baidu.com/">222</a>
+      <!-- .prevent提交事件不再重载页面 -->
+      <form v-on:submit.prevent="onSubmit"></form>
+      <button @click.prevent="doThis">button</button>
+      <!-- 添加事件监听器时使用事件捕获模式 -->
+      <!-- 即内部元素触发的事件先在此处理，然后才交由内部元素进行处理 -->
+      <div v-on:click.capture="doThis">...</div>
+      <!-- 只当在 event.target 是当前元素自身时触发处理函数 -->
+      <!-- 即事件不是从内部元素触发的 -->
+      <div v-on:click.self="doThat">...</div>
+      <!-- 点击事件将只会触发一次 -->
+      <a v-on:click.once="doThis"></a>
+    </div>
+    <!-- 计算属性 -->
+    <div>
+      <div>original message:{{message}}</div>
+      <div>reverse message: {{reverseMessageComputed}}</div>
+      <div>fullname: {{fullName}}</div>
+      {{fullName}}
+    </div>
+    <!--动态 绑定样式 -->
+    <div :class='{active:isActive}'>hhhhh</div>
+    <!-- div的样式取决于isActive 的 truthiness -->
+    <!-- 绑定多个class -->
+    <div :class="[active,normal]">qqq</div>
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  // new a  Vue 实例  
+  new Vue({
+    el: '#app',
+    data() {
+      return{
+        message: new Date().toLocaleString(),
+        // path:'data:image/jpeg;base64,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'
+        isShow: false,
+        isshow: true,
+        message2: 'hello world!',
+        event: 'click',
+        firstName: 'aaa',
+        lastName: 'bbb',
+        isActive: true,
+        active: 'active',
+        normal: 'normal'
+      }
+    },
+    created(){
+      // 修改 data 的message ，页面渲染的数据也再改变
+      this.message = 'hello'
+    },
+    methods:{//触发重新渲染时，调用方法总会再执行函数
+      reverseMessage () {
+        this.message2 = this.message2.split('').reverse().join('')
+      },
+      dosomething(){
+        console.log(111)
+      },
+      doThis(){
+      console.log('baudu.com')
+    }
+    },
+    // 计算属性，观察和响应数据变化
+    computed: {//可以缓存
+
+      reverseMessageComputed(){
+        // 拿到data的message 进行计算之后返回一个数据并不会修改message
+        return this.message.split('').reverse().join('')
+          // methods与computed 的区别
+          // 在上面的，只要拿到message未改变，即使访问computed的计算属性reverseMessagecomputed多次，也会返回之前的计算结果。 
+      },
+      now () {
+        return Date.now()//Date.now()不是响应式依赖，则该计算属性now 不会更新！!!!!!!!!!!!!!
+      },
+      // getter和setter
+      fullName : {
+        // getter:
+        get(){
+          return this.firstName+'·'+this.lastName
+        },
+        // setter:
+        // set(val){
+        //   console.log(111)
+        //   console.log('val:',val)
+        //   this.firstName = 'ccc'
+        // }
+        // set: function(val){
+        //   console.log('val',val)
+        //   var name = val
+        //   this.firstName = val
+        // }
+      }
+    },
+    // 侦听属性
+
+
+    
+  
+  })
+</script>
+<style>
+  .active{
+    background-color:red;
+  }
+  .normal{
+    border-bottom: 1px solid #999999;
+  }
+</style>
+</html>

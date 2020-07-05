@@ -492,7 +492,6 @@ console.log(dataforeach)//[ 2, 3, 4, 5, 6, 7 ]
 // filter()
 // filter()传参函数是逻辑判断函数
 // 返回true or false
-
 var small3 = data.filter(x => {
     return x > 3;
 })
@@ -500,6 +499,25 @@ console.log(small3)//[ 4, 5, 6 ]
 // 原理产生一个数组的子集，
 // 该子集满足条件，
 // 返回的是true的元素才会加入新数组
+var filterarr = [
+    { id: 15 },
+    { id: -1 },
+    { id: 0 },
+    { id: 3 },
+    { id: 12.2 },
+    { },
+    { id: null },
+    { id: NaN },
+    { id: 'undefined' }
+  ];
+//   判断数组的元素对象是否是数字类型
+
+
+// 查询数组元素
+// var indexofquery = ['english','math','chinese']
+// const 
+
+
 
 // reduce
 // 数组最大值
@@ -514,9 +532,47 @@ var product = data.reduce((x,y) => {
 })
 console.log( product )
 
+// 判断是否是数组类型
+console.log(Array.isArray(data))//true
 
 // 函数
 // 函数定义
 // 略
 
 // 类
+
+
+
+/**
+ * JavaScript — 一种内置于浏览器的高级脚本语言，您可以用来实现Web页面/应用中的功能。
+ * 注意JavaScript也可用于其他象Node这样的的编程环境。但现在您不必考虑这些。
+客户端API — 内置于浏览器的结构程序，位于JavaScript语言顶部，使您可以更容易的实现功能。
+第三方API — 置于第三方普通的结构程序（例如Twitter，Facebook），
+使您可以在自己的Web页面中使用那些平台的某些功能（例如在您的Web页面显示最新的Tweets）。
+JavaScript库 — 通常是包含具有特定功能的一个或多个JavaScript文件，
+把这些文件关联到您的Web页以快速或授权编写常见的功能。例如包含jQuery和Mootools
+JavaScript框架 — 从库开始的下一步，
+JavaScript框架视图把HTML、CSS、JavaScript和其他安装的技术打包在一起，然后用来从头编写一个完整的Web应用。
+ */
+
+
+//  window对象
+function dispalyTime(){
+  var elt = document.getElementById('clock')
+  var now = new Date()
+  elt.innerHTML = now.toLocaleDateString();
+  setTimeout(dispalyTime,1000)
+  // 鼠标左键单击
+  elt.onclick = function(){
+    alert(now)
+  }
+  // 鼠标在元素上
+  // elt.onmouseover = function(){
+  //   alert('focus')
+  // }
+  // 文本被选定
+  // elt.onselect = function(){
+  //   alert('select')
+  // }//不起作用
+}
+window.onload = dispalyTime
