@@ -1,0 +1,27 @@
+@import '~antd/dist/antd.css';
+.App {
+  text-align: center;
+  position: relative;
+  overflow: hidden; 
+  display: flex;
+  box-sizing: border-box;
+}
+
+// .App-logo {
+//   height: 40vmin;
+//   pointer-events: none;
+// }
+
+.indexLeft{
+  width: 240px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+#indexMain{
+  width: calc(100% - 240px);
+  margin-left: 240px;
+  height: 100%;
+}
