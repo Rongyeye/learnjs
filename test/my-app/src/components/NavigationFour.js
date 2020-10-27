@@ -1,4 +1,9 @@
-import React from 'react'
+import React, {useState,
+  useEffect,
+  useReducer,
+  useContext,
+  Fragment
+} from 'react'
 import ReactDOM from 'react-dom';
 import {createStore, combineReducers} from 'redux'
 import {connect} from 'react-redux'
@@ -71,10 +76,16 @@ class Simple extends React.Component {
 
 }
 function NavigationFour (store) {
+  // const [state, dispatch] = 
   return (
     <>
       <div>
         <p>NavigationFour</p>
+      {/* <Provider store={store}>
+        <Todo></Todo>
+        <showTodoList></showTodoList>
+        <SwitchFooter></SwitchFooter>
+      </Provider> */}
         <Simple></Simple>
       </div>
     </>

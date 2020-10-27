@@ -1,8 +1,18 @@
-import React, {useContext} from 'react'
-import {createStore, applyMiddleware} from 'redux' // 中间件
+import React, {useState,
+  useEffect,
+  useReducer,
+  useContext,
+  Fragment
+} from 'react'
+import ReactDOM from 'react-dom';
+import {createStore, combineReducers} from 'redux'
+import {connect} from 'react-redux'
 import {Input,Button, List} from 'antd'
-import { Provider } from 'react-redux'
 // redux
+
+
+
+
 class Simple1 extends React.Component {
   constructor(props) {
     super(props)
@@ -24,12 +34,11 @@ class Simple1 extends React.Component {
   }
   render() {
     return (
-      <>  
-        {/* Fragment 一个组件返回多个jsx元素是不合法的*/}
+      <>
         <p>
           <Input style={{width:'200px', marginRight: '20px'}}
             onChange={(e) => this.handleInputChange(e)}
-            value={this.state.inputValue} // {表达式}
+            value={this.state.inputValue}
           /> 
           <Button type="primary" onClick={() => this.handleList()}>submit</Button>
         </p>
@@ -71,91 +80,24 @@ let reducer = function (state = initial, action) {
   }
 }
 // store
-let store = createStore(reducer, applyMiddleware) // 中间件
+let store = createStore(reducer)
 function Simply () {
   return(
     <>
-
+      <p>
+        <Input style={{width:'200px', marginRight: '20px'}}
+          onChange={(e) => this.handleInputChange(e)}
+          value={this.state.inputValue}
+        /> 
+        <Button type="primary" onClick={() => this.handleList()}>submit</Button>
+      </p>
+      <List
+      size="small"
+      bordered
+      dataSource={this.state.list}
+      renderItem={item => <List.Item>{item}</List.Item>}
+      />      
     </>
-  )
-}
-
-// react hook  instead of redux
-// useContext 
-const Action = function(action) {
-  return {
-    type: action.type,
-    todo: action.todo|null,
-    index: action.index|null
-  }
-}
-const Istate = {
-  todos: [],
-  lastUpdate: null
-}
-const Reducer = function(state= Istate|null|undefined, action=Action) {
-  if(!state) {
-    return null
-  }
-  switch(action.type) {
-    case 'add_todo':
-      return {
-        ...state,
-        lastUpdate: Date.now(),
-        todos: state.todos.concat(action.todo)
-      }
-    case 'delete_todo':
-      {
-        const todos = state.todos.slice() // copy state
-        todos.splice(action.index, 1)
-        return {
-          ...state,
-          lastUpdate: Date.now(),
-          todos: todos
-        }
-      }
-  }
-}
-const makeStore = function () {
-  return createStore(Reducer, {
-    todos:[
-      'have lunch',
-      'go shopping',
-      'make a plan'
-    ],
-    lastUpdate: 0,
-  })
-}
-const appStore = makeStore()
-// 全局context
-// context 对象
-// const contextobj = React.createContext()
-// const appContext = useContext(null)
-function InputTodo () {
-  return(
-    <div>
-      <Input style={{width:'200px'}}></Input>
-    </div>
-  )
-}
-function TodoList () {
-  return(
-    <div>
-      <List></List>
-    </div>
-  )
-
-}
-function TodoApp () {
-  return (
-    <>
-      {/* <Provider store={appStore}>
-        <h1>Todo</h1>
-        <InputTodo/>
-        <TodoList/>
-      </Provider> */}
-    </>
-
   )
 }
 function NavigationFine (store) {
@@ -164,30 +106,14 @@ function NavigationFine (store) {
     <>
       <div>
         <p>NavigationFine</p>
-        <p>hook--redux</p>
       {/* <Provider store={store}>
         <Todo></Todo>
         <showTodoList></showTodoList>
         <SwitchFooter></SwitchFooter>
       </Provider> */}
         <Simply></Simply>
-        <TodoApp></TodoApp>
       </div>
     </>
   )
 }
 export default NavigationFine
-
-const Observer = (function() {
-  let _message = {}
-  return {
-    on: function() {
-
-    },
-    off: function() {
-
-    },
-    subcribe: function() {}
-
-  }
-})()

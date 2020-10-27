@@ -1,5 +1,4 @@
 import React, {useReducer} from 'react'
-// import {Action, createStore} from 'redux'
 const countReducer = function(state, action) {
   switch(action.type){
     case 'add': 
@@ -10,17 +9,12 @@ const countReducer = function(state, action) {
     return state
   }
 }
-
-
-
 function NavigationOne () {
   const [state, dispatch] = useReducer(countReducer, {count: 0})
   return (
     <>
       <div>
-        <p> NavigationOne</p>
-        <p> useReducer</p>
-
+        NavigationOne
       </div>
       <div>
         <button onClick={()=>dispatch({type: 'add'})}>+</button>
@@ -28,6 +22,7 @@ function NavigationOne () {
         count: {state.count}
         <button onClick={()=>dispatch({type: 'increase'})}>-</button>
         {/* <button onClick={dispatch({type: 'increase'})}>-</button> */}
+
       </div>
     </>
   )

@@ -1,4 +1,6 @@
 import React from 'react';
+// import {Router} from 'react-router'
+// import logo from './logo.svg';
 import {withRouter} from 'react-router-dom'
 import './App.scss';
 import Nav from './index/Nav'
